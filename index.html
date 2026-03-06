@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PawsomePetSupplies</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">🐾 PawsomePetSupplies</div>
+    <nav>
+        <button onclick="filterCategory('all',this)" class="active">ทั้งหมด</button>
+        <button onclick="filterCategory('d',this)">หมา</button>
+        <button onclick="filterCategory('c',this)">แมว</button>
+        <button onclick="filterCategory('b',this)">นก</button>
+        <button onclick="filterCategory('H',this)">แฮมสเตอร์</button>
+    </nav>
+</header>
+
+<section class="hero">
+    <h1>สินค้าคุณภาพสำหรับสัตว์เลี้ยงของคุณ</h1>
+    <p>คัดสรรสินค้าดี ๆ พร้อมสั่งซื้อผ่าน Shopee อย่างปลอดภัย</p>
+</section>
+
+<section class="products" id="productContainer"></section>
+
+</footer>
+
+<script>
+
+const products = [
+    
+{
+    name:"🐾🐈คานิว่า อาหารแมว kaniva cat food โซเดี่ยมต่ำและไม่เค็ม ถูกใจคน รู้ใจแมว",
+    img:"catm1.png",
+    link:"https://s.shopee.co.th/9UwGsi1bhA",
+    category:"c"
+},
+
+{
+    name:"🐾🐈ทรายแมวเต้าหู้ 6L ลิตร.ทรายเต้าหู้ ผลิตจากกากถั่วเหลือง ธรรมชาติทราย ละบายกลิ่นได้ดี มีให้เลือก7กลิ่น",
+    img:"catm2.png",
+    link:"https://s.shopee.co.th/6Afpc1n0sV",
+    category:"c"
+},
+
+{
+    name:"🐾🐈ถ้ำแมวเตียง😺สัตว์เลี้ยงเตียงแมวที่อบอุ่นรังแมวกึ่งปิดเตียงนอนนุ่มสบายมีหลายขนาดให้เลือก",
+    img:"catm3.png",
+    link:"https://s.shopee.co.th/AUoonKTiZk",
+    category:"c"
+},
+
+{
+    name:"🐾🐈😺หวีขนแมว แปรงขนแมว หวีแมว แปรงขนสุนัข แปลงขนแมว หวีขนสุนัข ที่หวีขนแมว กำจัดขนแมว มีปุ่มดันขนออก",
+    img:"catm4.png",
+    link:"https://s.shopee.co.th/2B9gsX8eUN",
+    category:"c"
+    
+    
+},
+
+{
+    name:"🐾🐈วิสกัส อาหารแมวเปียก เพาซ์ (Whiskas) อาหาร แมววิสกัส ราคายกลัง (โฉมใหม่ 28 ซอง )",
+    img:"catm5.png",
+    link:"https://s.shopee.co.th/70EwrKTDyL",
+    category:"c"
+    
+    
+},
+
+{
+    name:"🐾🐈ที่ให้อาหารสัตว์เลี้ยง สเตนเลส ที่ให้น้ำสัตว์เลี้ยง ที่ ให้อาหาร-น้ำอัตโนมัติ เกรดพรีเมี่ยม 2IN1",
+    img:"catm6.png",
+    link:"https://s.shopee.co.th/9UwHqPXMtF",
+    category:"c"
+    
+    
+},
+
+{
+    name:"🐾🐈YTL ขนมแมวเลีย 15g มี 3 รสชาติ ขนมแมว อาหารแมว แมวเลีย อาหารแมวเลีย ขนมทาสแมว แสนอร่อย รสชาติอร่อยถูกใจน้องแมว😺",
+    img:"catm7.png",
+    link:"https://s.shopee.co.th/5VQ95Sz2tm",
+    category:"c"
+    
+    
+},
+
+{
+    name:"🐾🐈อาหารแมวเปียกสุทธิ น้ำหนักสุทธิ 15g ขนมแมว/ขนมแมวเลีย/อาหารแมว",
+    img:"catm8.png",
+    link:"https://s.shopee.co.th/3fyUuQJSnj",
+    category:"c"
+    
+    
+},
+
+{
+    name:"🐾🐶สมาร์ทฮาร์ท อาหารสุนัข สุนัขโต รสเนื้ออบ 10 กก.  SmartHeart Adult Roast Beef 10kg",
+    img:"catm9.png",
+    link:"https://s.shopee.co.th/3LLeWBl7Yg",
+    category:"d"
+    
+    
+},
+
+{
+    name:"🐾🐈เกรดดีที่สุดของเล่นแมว ไม้ตกแมว ไม้แมว ตั้งพื้นขนนก ไม้ล่อแมว ของเล่นแมว ไม้ตกแมวยาว90CM",
+    img:"catm10.png",
+    link:"https://s.shopee.co.th/2LT7L74ete",
+    category:"c"
+    
+    
+},
+
+{
+    name:"yoyopet : ที่ลับเล็บแมว+แคทนิป อ่างลับเล็บของ เล่นแมว ที่นอนแมว 2in1 แผ่นลับเล็บ ที่ฝนเล็บสัตว์เลี้ยง",
+    img:"catm11.png",
+    link:"https://s.shopee.co.th/2B9h97iqYB",
+    category:"c"
+    
+    
+},
+
+{
+    name:"YTL คอนโดแมว ที่ฝนเล็บแมว เสาฝนเล็บแมว ที่ฝนเล็บแมว พร้อมของเล่น คลายเครียด ที่ฝนเล็บ แบบแท่ง ที่รับเล็บแมว",
+    img:"catm12.png",
+    link:"https://s.shopee.co.th/7fUdhp6DF3",
+    category:"c"
+    
+    
+},
+
+{
+    name:"🐾🐶ขนมสุนัข ขนมสุนัขแบบแท่งกลม ทำจากเนื้อวัวแท้ โปรตีนสูง 500 กรัม เหมาะสำหรับการฝึกและให้รางวัลสุนัข",
+    img:"catm13.png",
+    link:"https://s.shopee.co.th/6fc6XZwDjd",
+    category:"d"
+    
+    
+},
+
+{
+    name:"🐾🐶[กระสอบ] Pramy อาหารเม็ดสุนัขพรามี่ สูตรเน้นเนื้อแท้ โปรตีนสูง เสริมสร้างสุขภาพแบบรอบด้าน ขนาด 8-10kg",
+    img:"catm14.png",
+    link:"https://s.shopee.co.th/AUop6sB2bA",
+    category:"d"
+    
+    
+},
+
+{
+    name:"🐾🐶อาหารสุนัข 500 กรัม ขนมสุนัข เนื้อวัวแท้ 100% ออร์แกนิก สดและนุ่ม เสริมแคลเซียม เพิ่มความต้านทาน",
+    img:"catm15.png",
+    link:"https://s.shopee.co.th/4VXcDBj11X",
+    category:"d"
+    
+    
+},
+
+{
+    name:"🐾🐶DIY รั้วกั้นสุนัข คอกกั้นสัตว์  กรง diy กรงสุนัข ",
+    img:"catm16.png",
+    link:"https://s.shopee.co.th/50TsoPnBbO",
+    category:"d"
+    
+    
+},
+
+{
+    name:"Fidoz factory ตุ๊กตาขัดฟันสุนัข ของเล่นแมว หมา ของกัดเล่น สุนัข ตุ๊กตาหมามีเสียง",
+    img:"com1.png",
+    link:"https://s.shopee.co.th/6pvX06pWKh",
+    category:"d"
+    
+    
+},
+
+{
+    name:"ของเล่นสุนัข ของเล่นหมา สุนัข สัตว์เลี้ยง ลูกบอลสุนัข ของเล่นน้องหมา ขัดฟันสุนัข",
+    img:"com2.png",
+    link:"https://s.shopee.co.th/8KkKnBoixK",
+    category:"d"
+    
+    
+},
+
+{
+    name:"AL-107 ลูกบอล ของเล่นแมว บีบกัดมีเสียง ลูกบอลยาง ของ เล่นสุนัข ของเล่นหมา ยางกัดหมา มีเสียงปี๊ป ลูกบอลมีเสียง",
+    img:"com3.png",
+    link:"https://s.shopee.co.th/6KzGPgsRcR",
+    category:"d"
+    
+    
+},
+
+{
+    name:"ชามอาหารสัตว์ เอียง 15 องศา ชามอาหารหมา ที่ใส่ อาหารสัตว์เลี้ยง ชามสัตว์เลี้ยง อุปกรณ์ให้อาหารสัตว์",
+    img:"com5.png",
+    link:"https://s.shopee.co.th/8fNBC8dnsd",
+    category:"d"
+    
+    
+},  
+
+{
+    name:"【PET RECORD)อาหารสุนัขเปียก 460g โปรตีนสูง ย่อย ง่าย บำรุงขน สุขภาพดี อร่อยถูกใจทุกสายพันธุ์",
+    img:"com6.png",
+    link:"https://s.shopee.co.th/5L6jEE8ThD",
+    category:"d"
+    
+    
+},
+
+{
+    name:"Prestige (1kg.) อาหารนกสูตรพรีเมี่ยม",
+    img:"com7.png",
+    link:"https://s.shopee.co.th/4AulqN5eG9",
+    category:"b"
+    
+    
+},
+
+{
+    name:"Nutribird A21 สูตรสำหรับลูกนกทุกสายพันธุ์ อาหารลูกป้อน นก อาหารนก (แบ่งขาย 100G / 200G/ 500G)",
+    img:"com8.png",
+    link:"https://s.shopee.co.th/4qAgsYu4aW",
+    category:"b"
+    
+    
+},
+
+{
+    name:"Pawblic ของเล่นนก นกแก้ว ของตกแต่งกรง ของเล่นหัด กัดแทะสำหรับนกแก้ว ชุดของเล่นเปลแขวน ขนาดเล็ก ทำจ...",
+    img:"com9.png",
+    link:"https://s.shopee.co.th/LiHWQGlvM",
+    category:"b"
+    
+    
+},
+
+{
+    name:"กรงนก กรงนกหงส์หยก กรงกระต่าย พื้นที่ขนาด ใหญ่50*35*35cm พับได้ พร้อมคอนเกาะ ถ้วยน้ำ ถ้วยอาหา...",
+    img:"com10.png",
+    link:"https://s.shopee.co.th/9AJg2nIp45",
+    category:"b"
+    
+    
+},
+
+{
+    name:"Cage กรงนก กระต่าย หนูแกสบี้ ชูก้า (เล็ก กลางใหญ่) **อ่านลายละเอียดก่อนสั่งซื้อ**",
+    img:"com11.png",
+    link:"https://s.shopee.co.th/3fyjUmxXed",
+    category:"b"
+    
+    
+},
+
+{
+    name:"หลอดน้ำ หลอดอาหาร สำหรับนก หนู ชูก้า และสัตว์เลี้ยงอื่น (อ่านลายระเอียดก่อนสั่งซื้อ)",
+    img:"com12.png",
+    link:"https://s.shopee.co.th/900FqhhyMm",
+    category:"b"
+    
+    
+},
+
+{
+    name:"อาหารหนูแฮมสเตอร์ Bucatstate H1 H2 อาหารแฮมสเตอร์ แฟตเทล ไจแอนท์ วินเทอร์ไวท์ ดอร์เมาส์ อาหารรวมทุกสาย...",
+    img:"com13.png",
+    link:"https://s.shopee.co.th/15R8LpFei",
+    category:"H"
+    
+    
+},
+
+{
+    name:"อาหารแฮมเตอร์ ดอร์เมาส์ สำหรับ หนูแฮมเตอร์ ทุก สายพันธุ์",
+    img:"com14.png",
+    link:"https://s.shopee.co.th/4VXqUoZOK7",
+    category:"H"
+    
+    
+},
+
+{
+    name:"ขวดน้ำแฮมเตอร์ 250ml ที่ให้น้ำแบบแขวนกรง ขวดน้ำสัตว์ เลี้ยง ขวดน้ำกระต่าย แบบติดกรง บรรจุน้ำได้",
+    img:"com15.png",
+    link:"https://s.shopee.co.th/3B2SuSjGIJ",
+    category:"H"
+    
+    
+},
+
+{
+    name:"Ming วงล้อหนูแฮมสเตอร์ ไร้เสียง จักรวิ่งหนูแฮมสเตอร์ ล้อวิ่ง หนูแฮมเตอร์ ของเล่นแฮมเตอร์ ส่งไว พร้อมส่ง",
+    img:"com16.png",
+    link:"https://s.shopee.co.th/1gDf7vFcR5",
+    category:"H"
+    
+    
+},  
+
+{
+    name:"กรงหนูตะเภา กรงเอนกประสงค์ ขนาด 60/47 cm ฐานกว้าง สำหรับสัตว์เลี้ยงหนูแฮมสเตอร์ กรงสัตว์เล็ก",
+    img:"com17.png",
+    link:"https://s.shopee.co.th/gL7wBHHF0",
+    category:"H"
+    
+    
+},
+
+
+
+];
+
+let currentCategory = "all";
+
+document.addEventListener("DOMContentLoaded", renderProducts);
+
+function renderProducts(){
+    const container = document.getElementById("productContainer");
+    container.innerHTML="";
+
+    products.forEach(p=>{
+
+        if(currentCategory !== "all" && p.category !== currentCategory){
+            return;
+        }
+
+        container.innerHTML += `
+        <div class="card">
+           <img src="${p.img}" loading="lazy">
+            <h3>${p.name}</h3>
+            <a href="${p.link}" target="_blank" class="btn">
+                ดูเพิ่มเติมในShopee(กด)(เมื่อกดให้รอสักครู่เพื่อไปยังสินค้า)
+            </a>
+        </div>
+        `;
+    });
+}
+
+function filterCategory(category,btn){
+    currentCategory = category;
+
+    document.querySelectorAll("nav button")
+        .forEach(b=>b.classList.remove("active"));
+
+    btn.classList.add("active");
+
+    renderProducts();
+}
+
+</script>
+
+</body>
+</html>
